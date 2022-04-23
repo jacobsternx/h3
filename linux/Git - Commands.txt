@@ -1,7 +1,7 @@
 :: .gitconfig
 [user]
 	name = jacobsternx
-	email = ***********@gmail.com
+	email = jacobsternx@gmail.com
 [credential]
 	helper = cache --timeout=18000
 
@@ -38,7 +38,7 @@ git config --global --unset credential.helper
 Once we have a token, we need to configure the local GIT client with a username and email address. 
 https://www.edgoad.com/2021/02/using-personal-access-tokens-with-git-and-github.html
 git config --global user.name "jacobsternx"
-git config --global user.email ***********@gmail.com
+git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
 
 :: Using Personal Access Tokens
 When starting a new repo, the first REMOTE command should be git remote add origin git@github.com:username, if you run git remote set-url origin git@abc.com:mygit you will get error message: No such remote 'origin'.
@@ -105,42 +105,6 @@ To commit the changes made in the custom branch
   git commit -m "your message"
 To make changes in your GitHub repo
   git push
-
-:: Reverse commit with your personal email address
-(note that may be best to switch user.email to git noreply- email.)
-
-Find your GitHub noreply address in your GitHub's Personal Settings → Emails. It's mentioned in the description of the Keep my email address private checkbox. Usually, it starts with a unique identifier, plus your username:
-
-{ID}+{username}@users.noreply.github.com
-Keep my email address private
-
-Change the global user e-mail address setting to be your GitHub noreply address:
-
-git config --global user.email {ID}+{username}@users.noreply.github.com
-Reset the author information on your last commit:
-
-git commit --amend --reset-author
-If you have multiple commits with your private e-mail address, see this answer.
-
-Now you can push the commit with the noreply e-mail address, and future commits will have the noreply e-mail address as well.
-
-:: Reverse multiple commits with your private e-mail address
-
-The interactive rebase approach is pretty nice when used in conjunction with exec. You can run any shell command against a specific commit or all commits in the rebase.
-
-First set your git author settings
-git config --global user.name "John Doe"
-git config --global user.email johndoe@example.com
-Then to reset the author for all commits after the given SHA
-
-git rebase -i YOUR_SHA -x "git commit --amend --reset-author -CHEAD"
-This will pop up your editor to confirm the changes. All you need to do here is save and quit and it will go through each commit and run the command specified in the -x flag.
-
-Per @Dave's comment below, you can also change the author while maintaining the original timestamps with:
-
-git rebase -i YOUR_SHA -x "git commit --amend --author 'New Name <new_address@example.com>' -CHEAD"
-
-
 
 :: Git SSH Private/Public key pair 
 Check if you already have a SSH keypair generated. Do the following:
