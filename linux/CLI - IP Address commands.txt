@@ -1,0 +1,12 @@
+IP Address commands
+
+Private IP address of your interfaces (on your subnet):
+    ifconfig -a [ifconfig has been deprecated]
+    ip addr (ip a)
+    hostname -I | awk '{print $1}'
+    ip route get 1.2.3.4 | awk '{print $7}'
+    (Fedora) Network Settings > click gear icon next to the network name
+    nmcli -p device show
+
+Public IP address (IP address of your router
+    host myip.opendns.com resolver1.opendns.com

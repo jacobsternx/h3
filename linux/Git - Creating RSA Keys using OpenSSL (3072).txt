@@ -1,0 +1,67 @@
+Creating RSA Keys using OpenSSL (3072)
+https://www.scottbrady91.com/openssl/creating-rsa-keys-using-openssl
+Scott Brady
+05 August 2020 ・ OpenSSL ・ Updated January 2021
+
+Creating a private key for token signing doesn’t need to be a mystery. Recently, I wrote about using OpenSSL to create keys suitable for Elliptic Curve Cryptography (ECC), and in this article, I am going to show you how to do the same for RSA private and public keys, suitable for signature generation with RSASSA-PKCS1-v1_5 and RSASSA-PSS.
+tl;dr - OpenSSL RSA Cheat Sheet
+
+# generate a private key with the correct length
+openssl genrsa -out private-key.pem 3072
+
+# generate corresponding public key
+openssl rsa -in private-key.pem -pubout -out public-key.pem
+
+# optional: create a self-signed certificate
+openssl req -new -x509 -key private-key.pem -out cert.pem -days 360
+
+# optional: convert pem to pfx
+openssl pkcs12 -export -inkey private-key.pem -in cert.pem -out cert.pfx
+
+Generating an RSA Private Key Using OpenSSL
+
+You can generate an RSA private key using the following command:
+
+openssl genrsa -out private-key.pem 3072
+
+In this example, I have used a key length of 3072 bits. While 2048 is the minimum key length supported by specifications such as JOSE, it is recommended that you use 3072. This gives you 128-bit security. This command also uses an exponent of 65537, which you’ve likely seen serialized as “AQAB”.
+
+This gives you a PEM file containing your RSA private key, which should look something like the following:
+
+-----BEGIN RSA PRIVATE KEY-----
+-----END RSA PRIVATE KEY-----
+
+Creating an RSA Public Key from a Private Key Using OpenSSL
+
+Now that you have your private key, you can use it to generate another PEM file, containing only your public key.
+
+openssl rsa -in private-key.pem -pubout -out public-key.pem
+
+This should give you another PEM file, containing the public key:
+
+-----BEGIN PUBLIC KEY-----
+-----END PUBLIC KEY-----
+
+Creating an RSA Self-Signed Certificate Using OpenSSL
+
+Now that you have a private key, you can use it to generate a self-signed certificate. This is not required, but it allows you to use the key for server/client authentication, or gain X509 specific functionality in technologies such as JWT and SAML.
+
+openssl req -new -x509 -key private-key.pem -out cert.pem -days 360
+
+This will again generate yet another PEM file, this time containing the certificate created by your private key:
+
+-----BEGIN CERTIFICATE-----
+-----END CERTIFICATE-----
+
+You could leave things there, but often, when working on Windows, you will need to create a PFX file that contains both the certificate and the private key for you to export and use.
+
+You can do this using OpenSSL’s pkcs12 command:
+
+openssl pkcs12 -export -inkey private-key.pem -in cert.pem -out cert.pfx
+
+To convert certificate to .crt format:
+openssl x509 -outform der -in cert.pem -out cert.crt
+
+OpenSSL will ask you to create a password for the PFX file. Feel free to leave this blank.
+
+This should leave you with a certificate that Windows can both install and export the RSA private key from. 

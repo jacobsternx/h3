@@ -1,0 +1,143 @@
+:: Fedora 2022 ::
+
+:: Basic tools
+sudo dnf install yank
+sudo dnf info htop
+sudo dnf info less
+sudo dnf install less
+sudo dnf info htop
+sudo dnf install htop
+sudo dnf info ncdu
+sudo dnf install ncdu
+sudo dnf install gnome-tweak-tool (Window Titlebars)
+systemctl list-unit-files --type service -all
+
+:: Increase dnf speed ::
+sudo dnf install dnf-plugins-core -y
+sudo nano /etc/dnf/dnf.conf
+max_parallel_downloads=10
+fastestmirror=True
+
+:: How do I change desktops in Linux? ::
+Press Ctrl+Alt and an arrow key to switch between workspaces. Press Ctrl+Alt+Shift and an arrow key to move a window between workspaces.
+
+:: Fedora 35 > 36 Upgrade ::
+https://www.linuxcapable.com/how-to-upgrade-fedora-35-to-fedora-36-with-gnome-42/
+sudo dnf upgrade --refresh
+sudo dnf autoremove
+sudo dnf install dnf-plugin-system-upgrade -y
+sudo dnf system-upgrade download --releasever=36
+You will see a message advising importing the GPG keyType, press “Y” to proceed.
+sudo dnf distro-sync (may need to fix error)
+sudo fixfiles -B onboot
+sudo dnf system-upgrade reboot
+cat /etc/os-release (will read Fedora 35)
+sudo dnf system-upgrade clean
+sudo symlinks -r /usr | grep dangling
+sudo hostnamectl set-hostname --static fedora-36
+reboot
+
+:: Upgrading pre-release (beta) > release (stable)
+Don't need to do anything to get final release other than updating packages, either with dnf update or desktop notification. When pre-release > final, the fedora-repos packages will be updated and your updates-testing repository will be disabled. After release day, it is highly recommended to run sudo dnf distro-sync in order to align package versions with the current release.
+
+:: dnf ::
+dnf list (<null>, available, installed)
+dnf info (package_name) [specific info]
+dnf search (package_name) [search package details]
+dnf provides (package_name) [search dependencies]
+dnf remove (package_name)
+dnf grouplist [list all groups to install logical groups of packages]
+dnf groupinstall (group_name)
+dnf groupremove (group_name)
+dnf clean (all, dbcache, expire-cache, metadata, packages) [packages removes unneeded]
+dnf history [execution history]
+dnf history  info (id_number) [start and end time, who ran, packages installed, updated 
+dnf grouplist -v [list desktop environments]
+dnf install @basic-desktop-environment -y [install basic desktop environment]
+dnf remove @basic-desktop-environment -y [remove basic desktop environment]
+
+:: dnf - switching streams ::
+Switching streams is a risky operation that might not be always supported in packages, especially downgrades.
+dnf module switch-to NAME:VERSION [New version]
+Switching streams manually to Node.js 10 without the switch-to argument.
+dnf remove NAME:VERSION [Old; I needed to use module here]
+dnf module reset NAME:VERSION [Old version]
+dnf module enable NAME:VERSION [New version]
+dnf install NAME:VERSION [New version]
+
+:: Add user to vboxsf group to access virtualbox shared folder /vboxshare
+sudo usermod --append --groups vboxsf $USER
+sudo dnf update
+
+:: Fedora 35 Dark theme ::
+gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+
+:: SELinux ::
+sudo sestatus
+default mode is enforcing. To put it in Permissive mode, execute: 
+sudo setenforce 0
+sudo sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
+
+:: Install LAMP stack :: (see Fedora - Installing HTTPD for more info)
+:: https://docs.fedoraproject.org/en-US/quick-docs/getting-started-with-apache-http-server/
+:: https://docs.fedoraproject.org/en-US/quick-docs/installing-mysql-mariadb/
+:: Note: Install httpd, git, mariadb, php, phMyAdmin, perl.
+sudo dnf module list mariadb
+sudo dnf module list mariadb-server
+sudo dnf module install mariadb/server mariadb/client mariadb:10.5 -y
+sudo dnf module install mariadb:10.5 -y
+sudo dnf install mariadb-server -y
+sudo systemctl start mariadb
+sudo mysql_secure_installation
+sudo mysql version
+sudo mysql -u root -p
+sudo dnf install httpd -y
+sudo systemctl enable httpd.service
+sudo systemctl start httpd.service
+sudo dnf install mod_ssl -y
+ls /etc/httpd/conf
+ls /etc/httpd/conf/httpd.conf
+sudo nano /etc/httpd/conf/httpd.conf
+sudo systemctl reload httpd.service
+sudo systemctl status httpd.service
+ls /etc/pki/tls/certs/localhost.crt
+ls /etc/pki/tls/certs/
+ls -l /etc/pki/tls/certs/
+sudo dnf install dnf-plugins-core -y
+sudo dnf install php php-common -y
+sudo dnf install php-mysqlnd php-xml php-json php-gd php-mbstring -y
+sudo firewall-cmd –permanent –add-service=http
+sudo firewall-cmd –permanent –add-service=https
+sudo nano /etc/httpd/conf.d/welcome.conf
+sudo systemctl reload httpd.service
+sudo systemctl restart httpd.service
+sudo dnf install git -y
+sudo git config --global user.name "jacobsternx"
+sudo git config --global user.email ***********@gmail.com
+sudo nano ~/.gitconfig
+git config --global credential.helper "cache --timeout=18000"
+sudo dnf -y install httpd php php-cli php-php-gettext php-mbstring php-mcrypt php-mysqlnd php-pear php-curl php-gd php-xml php-bcmath php-zip
+
+# Git and mounting VMware host folder
+sudo mkdir /git
+sudo chown jacob.jacob /git
+sudo dnf install open-vm-tools
+# First way is to mount folder is CLI
+sudo vmhgfs-fuse .host:/git /git -o subtype=vmhgfs-fuse,allow_other,uid=1000,gid=1000
+# Second way is to mount folder is using /etc/fstab
+sudo nano /etc/fstab
+.host:/git /git fuse.vmhgfs-fuse defaults,allow_other,uid=1000,gid=1000 0 0
+***
+***
+### MUST RUN 'systemctl daemon-reload' AFTER EDITING fstab TO UPDATE GENERATED systemd UNITS.
+***
+***
+.host:/git /git fuse.vmhgfs-fuse defaults,allow_other,uid=1000,gid=1000 0 0
+sudo systemctl daemon-reload
+***
+***
+### MUST RUN 'systemctl daemon-reload' AFTER EDITING fstab TO UPDATE GENERATED systemd UNITS.
+***
+***
+Remount all partitions from /etc/fstab file, except partitions with noauto option.
+# mount -a

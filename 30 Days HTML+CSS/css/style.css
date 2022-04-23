@@ -1,0 +1,27 @@
+a {
+    color: red; text-decoration: none;
+}
+h3 {
+    font-family: sans-serif;
+}
+span {  /* Day 4 */
+    color:blue;
+}
+div {   /* Day 11 */
+    background: red;
+    width: 500px;
+    margin: auto; /* Perfectly centered. */
+    text-align: center;
+}
+#emphasis {     /* Day 12 */
+    color: red;
+}
+.emphasis {     /* Day 12 */
+    color: green;
+}
+#sect li:nth-child(3) { /* Day 12 */
+    color: orange;
+}
+ul:first-of-type li:nth-child(3) {
+    color: orange;
+}

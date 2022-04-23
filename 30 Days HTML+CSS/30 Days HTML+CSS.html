@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Days 9+ of 30 Days to Learn HTML & CSS</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a href="https://www.youtube.com/watch?v=yTHTo28hwTQ&list=PLgGbWId6zgaWZkPFI4Sc9QXDmmOWa1v5F"> 30 Days to Learn HTML & CSS (Full Course)<a> <br>
+<a href="https://www.youtube.com/watch?v=cyuzt1Dp8X8"> HTML & CSS Full Course</a> <br>
+<h3> Day 1</h3><br>
+<h1>Welcome!</h1>
+<hr> <!--Heading Ruler (self-closing) -->
+<br> <!-- line break (self-closing) -->
+&nbsp; <!-- Non-breaking space -->
+<b>bold</b> <i>italic</i> <sub>subscript</sub> <sup>superscript</sup> <small>small</small> <big>big</big><br>
+ 	<ins>inserted</ins> <del>deleted</del> <em> emphasized</em> <strong>strong</strong> <br>
+<a href="https://www.google.com" target=blank> Open new Google tab</a><br>
+<a href="path-filename.jpg"download="download-name">download.</a><br>
+<a href="about/index.html">Learn more</a>.<br>
+<br>
+<h3>Day 3, Lists </h3><br>
+	Lorem (Type this in VS Code or Sublime to get a paragraph of Ipsum).
+<p>Unordered Lists </p>
+<ul>
+	<li> first list item </li> 
+	<li> second list item </li>
+</ul>
+<p>Ordered Lists </p>
+<ol>
+	<li> first list item </li> 
+	<li> second list item </li> 
+</ol>
+<p>Definition Lists (Descriptions of each item)<p>
+<dl> <!--dt = definition term,  dd = definition details -->
+	<dt> inline element at left margin </li> followed by : </dt> 
+	<dd> newline plus indented block-level element <dd> </li> 
+</dl>
+<blockquote><p>
+	Follow good intent practices and Sublime: Press Ctrl-Alt-V to view in browser
+</blockquote></p><br>
+<br>
+<h3>Day 4: Parent-Child Relationships</h3><br>
+<span>Target this text with formatting</span><br>
+Ancestors, descendents, child, parent, sibling. <br>
+<br>
+<h3>Day 5: Heading Tags </h3><br>
+<span>Target this text with formatting</span><br>
+H1-H6 levels - Using these helps Google determine context, use all levels<br>
+Chrome > Right Click > Inspect Element to see ancestry <br>
+<br>
+<h3>Day 6: Blockquotes </h3><br>
+Markup simply describes content, does not specify fonts or styles.<br>
+<br>
+<h3>Day 7: Anchor Tags </h3><br>
+Visit me at <href=""https://www.google.com" target="_blank""> google</a>"<br>
+<a href="../index.html">Back to Home</a></p>
+<br>
+<h3>Day 8: Your First Stylesheet </h3><br>
+<a href="about/index.html" style=color:green> Learn more about me.</a><br>
+Can also use color: rgb(100,200,50); <br>
+Or hex: color: #e3e3e3, or color: hsl, or color: rgba{} <br>
+To inspect from browser, right click, then inspect.
+Can also use text-decoration: none to remove default link underline. <br>
+Bc code getting messy and aim of html is content not style, move style elements to style.css. <br>
+Link to style.css from <head> with:
+<pre>&lt;link rel="stylesheet" href"style.css&gt; (note: self-closing, could use /&gt;)</pre>
+style.css: (this says find all anchor tags and format them thusly)
+a { <br>
+	color: red; text-decoration: none; <br>
+} <br>
+h1 { <br>
+	font-family: helvetica, Arial, sans-serif (or simply sans-serif) <br>
+} <br>
+<br>
+<pre>HTML Ampersand Character Codes
+	<   to  &lt;
+	>   to  &gt;
+	&   to  &amp;  (also &#38;)
+	"   to  &quot;
+	'   to  &apos;
+		to 	&nbsp; (nonbreakable space)
+	§	to	&sect;
+	©	to 	&copy;
+	®	to	&reg;
+	°	to	&deg;
+	×	to	&times;
+	÷	to	&divide;
+</pre>
+To display the code required to output an ampersand symbol note that the amp; bit needs to be included twice. <br>
+<code>&amp;amp;</code> <br>
+<br>
+Preformatted Content <br>
+The &lt;pre&gt; Preformatted Content <br>
+<pre>
+The &lt;pre&gt; tag leaves the white space characters as is. Line breaks, spaces, tabs.
+</pre>
+<br>
+<h3>Day 9: Clean Project Structures </h3><br>
+Add folders css, img, js, about, and create index.html inside about/.<br>
+For future projects, create base file and folders.<br>
+<br>
+<h3>Day 10: Images </h3><br>
+<img src="img/th.jpg" alt="Lady golfer"><br>
+<br>
+<h3>Day 11: The Necessity of Divs </h3><br>
+<div>
+<h3> My Website</h3><br>
+Think of div's as a way to position content, not style or descriptive. No semantic value; just a bucket.
+<img src="img/mw.jpg" alt="Lady golfer"><br><br>
+</div>
+<h3>Day 12: IDs and Classes </h3><br>
+Assign labels to elements so we can target within sstylesheet. <br>
+Inline CSS for small project using &lt;style&gt;in head.<br>
+May use id tag to target individual element.<br>
+Use classes to style group of elements.<br>
+<ul>
+	<li>This</li>
+	<li>is</li>
+	<li id="emphasis">my</li>
+	<li>list.</li>
+</ul>
+May use class to target multiple elements
+<ul>
+	<li class="emphasis">This</li> 
+	<li>is</li>
+	<li class="emphasis">my</li>
+	<li>list.</li>
+</ul>
+May also use li:nth-child(3) to select the third element of all ul
+Another way is to use ul:first-of-type li:nth-child(3) to select only the first ul and the third child. <br>
+May also combine li:nth-child(3) with id on ul parent rather than child:
+<ul id="sect">
+	<li>This</li>
+	<li>is</li>
+	<li>my</li>
+	<li>list.</li>
+</ul>
+<br>
+<h3>Day 13: An Assignment </h3><br>
+Create webpage thusly: <br>
+<img src="img/Day 13 Assignment.png" alt="Day 13 Assignment"><br>
+<br>
+<h3>Day 14: Assignment Solutions </h3><br>
+<p>Correct assignment</p>
+Use blockquote tag and div wrap to combine elements of both styles.
+<br>
+<h3>Day 15: Floats, and a Simple Layout </h3><br>
+<br>
+<h3>Day 16: Navigation and Lists </h3><br>
+<br>
+<h3>Day 17: Introduction to Forms </h3><br>
+<br>
+<h3>Day 18: Image Replacement </h3><br>
+<br>
+<h3>Day 19: The Basics of Typography </h3><br>
+<br>
+<h3>Day 20: Relative and Absolute Positioning </h3><br>
+<br>
+<h3>Day 21: Creating a Website Fragment </h3><br>
+<br>
+<h3>Day 22: The Importance of Validation </h3><br>
+<br>
+<h3>Day 23: Zen Coding </h3><br>
+<br>
+<h3>Day 24: Resets and Normalizing </h3><br>
+<br>
+<h3>Day 25: CSS Frameworks </h3><br>
+<br>
+<h3>Day 26: Final Project Markup </h3><br>
+<br>
+<h3>Day 27: Slicing a PSD </h3><br>
+<br>
+<h3>Day 28: How to Create Snippets </h3><br>
+<br>
+<h3>Day 29: The CSS for Our Website </h3><br>
+<br>
+<h3>Day 30: Completing the Website </h3><br>
+<br>
+</body>
+</html>

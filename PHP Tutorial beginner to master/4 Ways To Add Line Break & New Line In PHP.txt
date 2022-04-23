@@ -1,0 +1,11 @@
+4 Ways To Add Line Break & New Line In PHP
+
+1. Define the linebreaks as-it-is in a string.
+   $lines = "Line 1
+   Line 2"; 
+
+2. Use the carriage return \r and newline \n characters – $lines = "Line 1\r\nLine 2";
+
+3. Use the PHP_EOL constant – $lines = "Line 1" . PHP_EOL . "Line 2";
+
+4. For HTML, use the <br> tag to add a new line – $lines = "Line 1<br>Line 2"; 

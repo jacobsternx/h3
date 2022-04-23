@@ -1,0 +1,14 @@
+HTML Ampersand Character Codes
+
+<   to  &lt;
+>   to  &gt;
+&   to  &amp;  (also &#38;)
+"   to  &quot;
+'   to  &apos;
+    to 	&nbsp; (nonbreakable space)
+§	to	&sect;
+©	to 	&copy;
+®	to	&reg;
+°	to	&deg;
+×	to	&times;
+÷	to	&divide;

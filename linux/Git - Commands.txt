@@ -1,0 +1,115 @@
+:: .gitconfig
+[user]
+	name = jacobsternx
+	email = ***********@gmail.com
+[credential]
+	helper = cache --timeout=18000
+
+:: [early notes]
+git config -l
+git status
+git add -A
+git commit -m "."
+git push -u origin main
+git reset --hard HEAD
+git clean -d -f
+Makes working directory and stage match the most recent commit (also called HEAD), effectively obliterating all tracked uncommitted changes. 
+To remove untracked files, you have to use the git clean command. 
+
+:: Generate a Personal Access Token:
+Log into GitHub
+Click on your name / Avatar in the upper right corner and select Settings
+On the left, click Developer settings
+Select Personal access tokens and click Generate new token
+Give the token a description/name and select the scope of the token
+Selected repo for pull, push, clone, and commit actions, and admin:repo_hook
+Click Generate token
+Copy the token – this is your new password!
+
+:: Configure Credential Caching
+https://techexpertise.medium.com/storing-git-credentials-with-git-credential-helper-33d22a6b5ce7
+git config --global credential.helper store
+The .git-credentials file stores token in plain text. Each credential is stored on its a line as a URL
+git config -l
+If needed, you can later clear the token from the local computer by running
+git config --global --unset credential.helper
+
+:: Configure local
+Once we have a token, we need to configure the local GIT client with a username and email address. 
+https://www.edgoad.com/2021/02/using-personal-access-tokens-with-git-and-github.html
+git config --global user.name "jacobsternx"
+git config --global user.email ***********@gmail.com
+
+:: Using Personal Access Tokens
+When starting a new repo, the first REMOTE command should be git remote add origin git@github.com:username, if you run git remote set-url origin git@abc.com:mygit you will get error message: No such remote 'origin'.
+git remote add origin git@github.com:jacobsternx
+git remote set-url origin https://jacobsternx:<token-value>@github.com/jacobsternx/h3.git
+git config -l
+
+:: Clone from GitHub
+git clone https://github.com/jacobsternx/h3.git (do this from /git)
+
+:: Basic Git Operations
+git add -A stages all changes no matter where executed whether it be the subdirectory or the parent directory.
+git add -u stages modifications and deletions, without new files
+git add . stages new files and modifications, without deletions (on the current directory).
+git commit -m "commit message"
+git-secrets scans commits, commit messages, and --no-ff merges to prevent adding secrets into your git repositories. If a commit, commit message, or any commit in a --no-ff merge history matches one of your configured prohibited regular expression patterns, then the commit is rejected.
+
+https://stackoverflow.com/questions/23401652/fatal-the-current-branch-master-has-no-upstream-branch
+git push origin head -u 
+If you are on any branch, this creates the branch of same name on the remote. 
+git config --global push.default current (then: git push, changes config)
+Always push a local branch to upstream. Default as usually no harm creating new branches upstream
+git branch 
+
+First use git pull origin your_branch_name Then use git push origin your_branch_name
+git pull --rebase git_url(Ex: https://github.com/username/reponame.git)
+git push origin main
+If it shows any fatal error regarding upstream after any future push then simply run:
+git push --set-upstream origin main
+
+:: Block command line pushes that expose my email: Solve it by modifying Git email
+   75816278+jacobsternx@users.noreply.github.com
+1. View current global user email: git config — global user.email
+2. Find GitHub recommended email: in setting Email –> Email under keep my email private 
+3. Reset global user email: git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
+4. Reset last submitted author information git commit --amend --reset-author
+5. Resubmit git push --no-edit to avoid the editor
+(For GPG key use Seahorse)
+
+:: Advanced Git Operations
+git log shows commits, <SHA> is a git commit ID and git log --stat shows stats about file names and line changes.
+git revert <SHA> Creates a new commit that’s the opposite (or inverse) of the given SHA
+git commit --amend or git commit --amend -m "commit message"
+Will update and replace the most recent commit with a new commit that combines any staged changes with the contents of the previous commit. With nothing currently staged, this just rewrites the previous commit message.
+git rebase -i <SHA> 
+merge
+reword
+rebase
+fixup
+squash
+pick
+autosquash
+
+:: To add files on specific branch ::
+To create custom branch
+  git branch branchname
+To switch into custom branch
+  git checkout branchname
+To initialize in the custom branch
+  git init
+To add files in the custom branch
+  git add file name
+To commit the changes made in the custom branch
+  git commit -m "your message"
+To make changes in your GitHub repo
+  git push
+
+:: Git SSH Private/Public key pair 
+Check if you already have a SSH keypair generated. Do the following:
+$ ls -la ~/.ssh/id_rsa*
+If the files exist, you already have SSH installed. IMPORTANT: But if you wish to regenerate the SSH key pair, at least back up your old SSH keys.
+$ cp ~/.ssh/id_rsa ~/.ssh/id_rsa.old  # Make a copy of the old SSH private key
+$ cp ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub.old  # Make a copy of the old SSH public key
+BE CAREFUL when using your ~/.ssh/id_rsa file. This is your private key, guard it properly.

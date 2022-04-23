@@ -1,0 +1,10 @@
+:: Sublime Text Editor Installation ::
+Use the sublime official yum repository for the installation on Fedora systems. 
+Open a terminal and import the gpg key used for packages signed on your system.
+  sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+Now, Add the Sublime text yum repository to your system using DNF command.
+  sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+Let’s install sublime text latest version on your system by executing the following command
+  sudo dnf install sublime-text
+Start using
+  subl

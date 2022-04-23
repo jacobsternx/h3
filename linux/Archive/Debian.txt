@@ -1,0 +1,72 @@
+Debian 11
+::Add user to sudoers file
+sudo usermod -a -G sudo jacob
+su
+gpasswd -a jacob sudo (if usermod not found) must reboot)
+groups jacob
+getent group sudo // all sudoers
+
+:: verify Apache running
+sudo lsof -i :80
+
+:: change window managers
+update-alternatives --config x-window-manager
+
+:: etc/apt/sources.list
+deb http://deb.debian.org/debian buster main contrib
+deb-src http://deb.debian.org/debian buster main contrib
+#
+deb http://deb.debian.org/debian-security/ buster/updates main contrib
+deb-src http://deb.debian.org/debian-security/ buster/updates main contrib
+#
+deb http://deb.debian.org/debian buster-updates main contrib
+deb-src http://deb.debian.org/debian buster-updates main contrib
+
+:: guest-additions
+sudo apt update
+sudo apt install -y --reinstall virtualbox-guest-x11
+sudo reboot now
+
+:: package management
+apt install dkms linux-headers-$(uname -r) build-essential
+apt install lightwm awesome synaptic nemo firefox-esr
+apt install gdisk gnome-system-monitor gnome-terminal nitrogen transmission
+apt install exa (bash alias) ripgrep (bash alias)
+(left polybar alacritty fish leafpad)
+(gimp vlc libreoffice-calc libreoffice-writer transmission)
+apt clean
+apt autoclean
+apt autoremove
+dpkg -l
+apt list --installed | grep search_term | more
+apt -y full-upgrade
+
+:: awesome wm  https://awesomewm.org/apidoc/core_components/tag.html
+--Each screen has its own tag table.
+--awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
+awful.tag({" dev ", " www ", " sys ", " doc ",  " vbox ", " chat ", " mus ", " vid ", " gfx "}, s, awful.layout.layouts[1])
+#tags = [" dev ", " www ", " sys ", " doc ",  " vbox ", " chat ", " mus ", " vid ", " gfx "]
+tags = [" dev ", " www ", " sys ", " doc ",  " vbox ", " chat ", " mus ", " vid ", " gfx "]
+
+:: list running processes  https://www.golinuxcloud.com/linux-list-processes/
+top
+ps aux
+ps axjf
+pstree -p
+
+:: storage
+mount
+df
+
+:: resolution
+xrandr -s 1440x900* (want but won't work: 1280x960* 1152x864* 800x600*)
+alias x14='xrandr -s 1440x960'
+alias x12='xrandr -s 1280x960'
+alias x11='xrandr -s 1152x864'
+alias x8='xrandr -s 800x600'
+
+
+shutdown -r (now is implied)
+
+In bash you can append any file content to your history: history -r file. 
+After that you just have to press up-arrow (same as Ctrl-p) to edit and execute the commands, or start them with !.

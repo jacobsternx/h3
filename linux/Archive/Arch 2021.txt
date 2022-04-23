@@ -1,0 +1,158 @@
+How to install Arch Linux - 2021 Edition
+https://www.youtube.com/watch?v=cM2UDz8BepU
+
+:: temporary network
+# ip link
+# ping www.arizona.edu
+# timedatectl set-ntp true
+# timedatectl status
+# timedatectl list-timezones 
+# sudo timedatectl set-timezone "America/Phoenix"
+
+:: disk
+# fdisk /dev/sda
+	p print list
+	c create
+	t change type 82 swap
+# mkswap /dev/sda1
+# mkfs.ext4 /dev/sda2
+# mount /dev/sda2 /mnt
+# swapon /dev/sda1
+# lsblk
+# pacstrap /mnt base linux linux-firmware base-devel nano
+# genfstab -U /mnt >> /mnt/etc/fstab
+# arch-chroot /mnt
+
+:: local time
+# ln -sf /usr/share/zoneinfo/America/Phoenix /etc/localtime
+# hwclock --systohc
+# nano /etc/locale.gen	(uncomment "en_US.UTF-8 UTF-8")
+# locale-gen
+
+:: host and locale
+# nano /etc/locale.conf (insert "LANG=en_US.UTF-8")
+# nano /etc/hostname (insert "archangel")
+# nano /etc/hosts
+	127.0.0.1	localhost
+	::1		localhost
+	127.0.1.1	archangel.localdomain	archangel
+
+:: wrapup
+# mkinitcpio -P
+# passwd (set root password)
+
+:: grub
+https://wiki.archlinux.org/index.php/GRUB
+# pacman -Sy grub
+# grub-install --target=i386-pc /dev/sda
+# grub-mkconfig -o /boot/grub/grub.cfg
+# exit
+# shutdown -r now
+
+:: persistent network (systemd-networkd)
+https://wiki.archlinux.org/index.php/systemd-networkd
+# systemctl start systemd-networkd
+# systemctl start systemd-resolved
+# networkctl list
+# nano /etc/systemd/network/20-wired.network
+	[Match]
+	Name=enp0s3 (use second network label in "networkctl list")
+	[Network]
+	DHCP=yes
+# systemctl restart systemd-networkd
+# systemctl restart systemd-resolved
+# systemctl enable systemd-networkd
+# systemctl enable systemd-resolved
+
+:: user account
+# useradd -g users -G wheel,storage,power -m coby
+# passwd coby
+# pacman -Sy sudo vi openssh
+# visudo (uncomment Wheel group with password)
+# systemctl start sshd (*** if you want to ssh in***)
+# systemctl enable sshd (*** if you want to ssh in***)
+
+:: pacman
+https://wiki.archlinux.org/index.php/pacman
+-Sy			apt-get update
+-Su			apt-get upgrade
+-Syu			Upgrade all packages
+-S packagename		Install package
+-R packagename		Remove package
+-Rns packagename	Remove package + sys config + dependencies
+-Ss packagename		Query remote package
+-Qs packagename		Query local installed package
+-Qdt			Installed orphans
+-Rns $(pacman -Qtdq)	Remove orphaned packages
+-Syy 			Forces cache update (or else may take ~5 min)
+-Syuw 			Allows packages to be individually upgraded
+-Q 			All programs
+-Qe			All programs explicitly installed
+-Qq			Program names without versions
+-Qn			Packages installed from main repos
+-Qm			Packages installed from AUR
+-Sc			Purge cache
+| wc -L			Count lines
+pacman-key --init
+pacman-key --populate archlinux
+/etc/pacman.conf		uncomment Color, VerbosePkgLists
+/etc/pacman.d/mirrorlist	order of repos queried--move US servers to top, comment out no response
+
+:: yay
+https://www.debugpoint.com/2021/01/install-yay-arch/
+(***Build as non-root***)
+cd /opt
+sudo git clone https://aur.archlinux.org/yay.git
+sudo chown -R coby:users ./yay
+id
+cd yay
+makepkg -si
+tree /opt/yay
+rm -rf /opt/yay/*
+yay -S packagename (install)
+yay -Rns packagename (remove)
+yay -Ps (quick system stats)
+
+:: packages
+//ranger	text file explorer
+htop		advanced top
+youtube-dl	download yt videos
+ncdu		storage analysis
+speedread	150 wpm default center speed read
+cmatrix		matrix screen
+bpytop		advanced htop
+deadbeef	music player
+exa		colorized ls (rust)
+bat		colorized cat with less (rust)
+//ripgrep	advanced find (rust)
+fd		advanced find (rust)
+//mtr		advanced traceroute
+yank & kill	Ctrl-Y, Ctrl-U (before cursor), Ctrl-W (kill prev word)
+tail/less	tail -f --> less +F (to navigate: shift-f, ctrl-c)
+neofetch	terminal display system info
+inxi		inxi -Fxxxrza
+
+:: find
+The basic syntax of the find command is: find [filename].
+After find, use a shortcut to specify the directory: 
+"." for nested folders; 
+"/" for the entire file system; 
+"~" for the active user's home directory.
+Use expression -name to search for a file name. For example: find / -name *.mp3.
+arch: $ sudo pacman -S exa
+fedora: sudo dnf install exa
+
+:: install exa from source (CentOS, RedHat)
+First install Rust, following instructions (accept default)
+$ curl https://sh.rustup.rs -sSf | sh
+Then get and unzip source
+$ wget https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_x64-v0.10.1.zip
+unzip exa-linux-x86_64-v0.10.1.zip
+Then move to /usr/local/bin:\
+sudo mv bin/exa /usr/local/bin/
+Then move completions/exa.bash to /etc/bash_completion.d
+sudo mv completions/exa.bash /etc/bash_completion.d/
+Finally create alias for exa in .bashrc
+$ nano .bashrc > alias ls='exa -Tl" (with inode:# alias ls='exa -bghHliS")
+options: https://github.com/ogham/exa#command-line-options
+$ source ~/.bashrc

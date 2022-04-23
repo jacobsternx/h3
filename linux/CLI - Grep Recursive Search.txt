@@ -1,0 +1,18 @@
+:: Recursive search with grep
+::
+grep -rl alvin .
+    -r option says “do a recursive search”
+    -l option (lowercase letter L) says “list only filenames”
+    -i for case-insensitive searches
+    -v to reverse the meaning of the search
+::
+More: Search multiple subdirectories
+grep -ril alvin /home/cato /htdocs/zenf
+::
+egrep command lets you search for multiple patterns at one time. 
+egrep -ril 'aja|alvin' .
+Note that in this case, quotes are required around my search pattern.
+Summary: `grep -r` notes
+
+Find (note that the excluded-dir list are patterns rather than folder names)
+sudo grep -rl --exclude-dir={boot,dev,lib,lost+found,mnt,opt,proc,run,srv,sys,usr,var} id_rsa /

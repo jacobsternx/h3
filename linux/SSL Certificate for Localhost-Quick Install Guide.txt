@@ -1,0 +1,23 @@
+SSL Certificate for Localhost: A Quick Guide to Generate And Install
+https://aboutssl.org/ssl-certificate-for-localhost/
+
+You will just generate an SSL certificate yourself for your localhost.
+Generate an SSL Certificate for Localhost
+
+To secure your localhost with an SSL certificate, you need to go for a “self-signed SSL certificate.” A self-signed SSL certificate is nothing but an SSL certificate that you will generate for yourself without purchasing it from a certificate authority. This SSL certificate will encrypt your data. But this does not mean you will not see the “Not Secure” warning and despite having an SSL for your localhost, you will still see the warning in the browser. But the good news is that you need not worry about it, as this SSL certificate you generate for your local host will encrypt your data.
+
+Remember, it is possible to secure your local host with an SSL certificate you generate without the help of a CA. However, though you can generate an SSL certificate for local development, this certificate will not be trusted by anyone else.
+
+The best and quickest way to generate a self-signed certificate is by using the openssl command. Using the openssl command, this is how you can generate a self-signed SSL certificate for your localhost, along with a private key.
+
+openssl req -x509 -out localhost.crt -keyout localhost.key \
+-newkey rsa:3072 -nodes -sha512 \
+-subj '/CN=localhost' -extensions EXT -config <( \
+printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+After you generate a self-signed certificate with the above openssl command, you can use localhost.crt and localhost.key to configure your local webserver. Now it is done and you have just created and installed an SSL certificate on your localhost.
+
+# sudo cp localhost.crt /etc/pki/tls/certs/
+# sudo cp localhost.key /etc/pki/tls/private/myhost.com.key
+# sudo restorecon -RvF /etc/pki
+# sudo systemctl enable httpd.service
+# sudo systemctl start httpd.service

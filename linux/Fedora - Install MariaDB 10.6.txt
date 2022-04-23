@@ -1,0 +1,108 @@
+Install MariaDB 10.6 on Fedora 35
+Web Development System Administration
+Dec 28, 2021
+
+https://r00t4bl3.com/post/how-to-install-mariadb-10-6-on-fedora-35
+
+:: MySQL is a popular RDBMS (Relational Database Management System). MariaDB was born as a fork of MySQL. Nowadays the two products are a little bit different. Migrating data from one system to the other could not be a trivial task.
+
+:: MariaDB Installation from the Fedora Modular Repository
+
+First, we can list the available versions (streams in modularity terminology) of MariaDB:
+$ dnf module list mariadb
+
+:: MariaDB Module List
+
+To enable the version of MariaDB you want to use and make the stream RPMs available in the package set. In this case, we'll use 10.6:
+$ sudo dnf module enable mariadb:10.6
+
+:: Enabling Module
+
+At this point you can verify that the available RPM provides the 10.6 version of MariaDB server:
+$ dnf list mariadb-server
+
+:: DNF List MariaDB
+
+To install MariaDB server, enter this command:
+$ sudo dnf module install mariadb/server mariadb/client
+
+:: MariaDB Installation
+
+Press "Y" followed by "Enter" to continue with installation process.
+
+With modules, you could also install a specific profile: like client, devel or galera (the multi-master replica). For instance, if you don’t want to install the server stuff, but only the client packages:
+$ sudo dnf module install mariadb:10.6/client
+
+:: Next, to run MariaDB service at system boot, we must enable it in systemd.
+
+$ sudo systemctl enable mariadb
+$ sudo systemctl start mariadb
+
+:: Enable MariaDB service
+
+Initial MariaDB Configuration
+
+Before the first use, we need to initialize MariaDB configuration. Back to your terminal and enter this command:
+$ sudo mysql_secure_installation
+
+It will ask some questions: answer to them as you prefer; answering yes to all of them is perfectly fine.
+
+:: Secure Installation
+
+Secure Installation
+Using MariaDB Shell
+
+:: To connect with your newly installed MariaDB server is:
+$ sudo mysql -u root -p
+
+Connect to the MySQL/MariaDB shell using the mysql command as mentioned above. Once gained access to the shell you can get the running version of the software:
+mysql> SELECT version();
+
+:: You can create a database:
+mysql> CREATE SCHEMA test;
+MariaDB [(none)]> CREATE SCHEMA phpmyadmin;
+
+:: Create a user:
+(previously youknowwhattodo)
+mysql> GRANT ALL PRIVILEGES ON test.* TO 'jacob'@'localhost' IDENTIFIED BY 'mar';
+
+:: List the available databases:
+mysql> SHOW SCHEMAS;
+
+:: Using MariaDB Shell
+Files Location
+
+:: The database disk storage is located in /var/lib/mysql.
+Enable Remote Access to MariaDB Server [No thanks!]
+
+:: To enable remote access to our MariaDB Server, we need to add new rule to Firewalld. First, we need to open MariaDB port (3306) on FireWalld:
+$ sudo firewall-cmd --permanent --zone=public --add-service=mysql
+OR
+$ sudo firewall-cmd --permanent --zone=public --add-port=3306/tcp
+
+After that, we must restart firewalld.service to let our new setting takes effect.
+$ sudo systemctl restart firewalld.service
+
+:: Update Configuration Files
+
+MariaDB configuration files are stored in /etc/my.cnf.d/mariadb-server.cnf.
+
+Navigate to the line that begins with the bind-address directive. By default it should be commented (the line begins with '#'). To allow remote access, you could remove the '#' sign and set this directive to a wildcard IP address, either *, ::, or 0.0.0.0:
+bind-address            = 0.0.0.0
+
+:: After changing this line, save and close the file and then restart the MariaDB service:
+$ sudo systemctl restart mariadb
+
+:: Creating a remote user.
+mysql> CREATE USER 'remote'@'host_ip_addr' IDENTIFIED BY 'your_password';
+
+Replace your_username and your_password depending on what you want the username and password to be. Here, host_ip_addr is the hostname or IP address of the computer from where you want to connect to the MySQL/MariaDB server. You can also use % as host_ip_addr if you want to connect from any computer. It can also be something like 192.168.2.% if you want to connect from computers from the IP range 192.168.2.1 – 192.168.2.254.
+Allow Access
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'jacob'@'%' IDENTIFIED BY 'PASSWORD' WITH GRANT OPTION;
+OR
+It is common for people to want to create a "root" user that can connect from anywhere, so as an example, we’ll do just that, but to improve on it we’ll create a root user that can connect from anywhere on the local area network (LAN)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.%.%' IDENTIFIED BY 'my-new-password' WITH GRANT OPTION;
+
+And finally:
+mysql> FLUSH PRIVILEGES;

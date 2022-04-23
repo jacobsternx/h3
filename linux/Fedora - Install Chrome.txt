@@ -1,0 +1,28 @@
+:: Fedora - Installing Chrome
+::
+The additional repositories can also be managed using a terminal and DNF.
+    Install Third Party Repositories
+    $ sudo dnf install fedora-workstation-repositories
+    Enable the Google Chrome repo:
+    $ sudo dnf config-manager --set-enabled google-chrome
+    Finally, install Chrome:
+    $ sudo dnf install google-chrome-stable
+If you want to install the Chrome Dev Channel version, use the following command:
+    $ sudo dnf install google-chrome-unstable
+If you want to install Chrome Beta use the following:
+    $ sudo dnf install google-chrome-beta
+
+To disable or remove “Managed by your organization”
+1. chrome://flags/ in addressbar 
+2. Now type managed in the “Search flags” box.
+3. Select Disabled from the drop-down box.
+4. Click on “Relaunch now“
+(Above does not work, below works but will revert)
+sudo delete, move, or rename /usr/share/chromium/policies/managed/00_gssapi.json
+(linked from /etc/chromium/policies/managed and /etc/opt/chrome/policies/managed)
+
+CLI Installing Chrome
+Fedora now comes with the Google Chrome repository. But, the repository is disabled by default. So, you will need to enable the Google Chrome repository to install it on your system.
+$ sudo sed -i 's/enabled=0/enabled=1/' /etc/yum.repos.d/google-chrome.repo
+Install Google Chrome on Fedora 35
+$ sudo dnf install -y google-chrome-stable

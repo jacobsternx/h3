@@ -1,0 +1,64 @@
+:: Installing MySQL/MariaDB
+:: https://docs.fedoraproject.org/en-US/quick-docs/installing-mysql-mariadb/
+:: clean up from line 5 - 30
+
+MySQL is a popular RDBMS (Relational Database Management System). MariaDB was born as a fork of MySQL. Nowadays the two products are a little bit different. Migrating data from one system to the other could not be a trivial task.
+MariaDB is fully GPLv2 licensed while MySQL has two licensing options, GPLv2 (for the Community edition) and Enterprise.
+In the Fedora repositories you can find:
+    MariaDB 10.3 (as a regular package or as a module)
+    MariaDB 10.4 (as a module)
+    MySQL 8.0 community edition (as a regular package or as a module)
+    MariaDB and MySQL packages conflict each other. You have to install MariaDB or MySQL.
+    In addition you can install MySQL commmunity edition (8.0 or 5.7) from the repository maintained by MySQL itself: https://dev.mysql.com/downloads/repo/yum/
+
+:: Install from Oracle MySql ::
+[snip]
+
+:: To install mariadb server ::
+
+sudo dnf module install mariadb/server
+With modules, you could also install a specific profile: like client, devel or galera (the multi-master replica). For instance, if you don’t want to install the server stuff, but only the client packages:
+sudo dnf module install mariadb:10.6/client
+    MariaDB default root password is empty.
+    find Default Password, For security reasons, MySQL generates a temporary root key. Please
+sudo grep 'temporary password' /var/log/mysqld.log
+
+Configuring SQL before the first use
+sudo mysql_secure_installation
+Some questions will be asked: answer to them as you prefer; answering yes to all of them is perfectly fine.
+
+Using SQL
+sudo mysql -u root -p
+
+Removing SQL
+I suggest to remove in the following way:
+sudo dnf remove mariadb-server
+
+:: Install from Podman ::
+[..snip..]
+
+:: My Notes ::
+/var/log/mariadb/mariadb.log
+#
+sudo journalctl -xeu mariadb.service
+Database MariaDB is probably initialized in /var/lib/mysql already, nothing is done.
+If this is not the case, make sure the /var/lib/mysql is empty before running mariadb-prepare-db-dir.
+2022-04-03 22:54:49 0 [Note] /usr/libexec/mariadbd (mysqld 10.5.13-MariaDB) starting as process 5406 ...
+mariadb.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+#
+sudo dnf module enable mariadb:10.6
+It is not possible to switch enabled streams of a module unless explicitly enabled via configuration option module_stream_switch.
+It is recommended to rather remove all installed content from the module, and reset the module using 'dnf module reset <module_name>' command. After you reset the module, you can install the other stream.
+#
+Most commonly errors that do not disappear after a reinstallation mean that your data directory (by default /var/lib/mysql/) is corrupted and the database needs to be reinstalled with mysql_install_db. To make sure you do a clean installation, remove all files located in the data directory and then run sudo mysql_install_db --user=mysql.
+#
+answered May 10, 2019 at 8:04
+markusjm
+I solved as follows:
+After installing
+Run: > mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/
+Then: > mysql_secure_installation
+And then: systemctl start mariadb
+
+:: Change password ::
+SET PASSWORD FOR 'jacob'@'localhost' = PASSWORD('a');

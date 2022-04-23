@@ -1,0 +1,82 @@
+:: Three YT Videos on Memory and Learning by Justin Sung
+1. PROBLEM with Active Recall and Spaced Repetition (Truth Behind Studying Smarter)
+2. Encoding: 2 Basic Steps to Study More Efficiently
+3. Five Techniques of Every Successful Student
+
+
+1. PROBLEM with Active Recall and Spaced Repetition (Truth Behind Studying Smarter)
+:: Justin Sung
+:: https://www.youtube.com/watch?v=--Hu2w0s72Y
+::                                                 --> Encoding
+Sensory Info --> Sensory Memory --> Working Memory               Long Term Memory
+                                                   <-- Retrieval
+                 \ forget (~all)    \ forget (secs-mins)         \ forget (hours-months)
+
+Cognitive Load is energy of encoding long term memory.
+Active recall and spaced repetition is really good to start but diminishing returns. Active recall is testing and spaced repetition is used to defeat the forgetting curve.
+Forgetting Curve: The more knowledge is repeated/learned, the more it is retained (flat)
+Dunning-Kreugger Effect: Confidence vs Knowledge in field
+Initially: max confidence 
+Then: there's more to this than I thought
+Then: I'm never going to understand this
+Then: It's starting to make sense
+Then: It's complicated
+"I realized the more I learned, the less I knew."
+WWII: military found planes were mostly getting shot in the wings, proposes more armor. Statician studied and found planes shot more in fuselage never returned.
+
+
+2. Encoding: 2 Basic Steps to Study More Efficiently ::
+:: Justin Sung
+:: https://www.youtube.com/watch?v=VcT8puLpNKA
+::
+1. Basic Principle of Encoding 
+2. Increase cognitive load tolerance
+Results 1-2 months
+Encoding techniques: High and low orders of learning. 
+Deep processing, higher encoding, happens at higer orders of learning.
+Most people do not use predominantly higher order learning process because studying habits in primary school traditionally tests lower order only.
+Encoding only happens when you have clear organizational structure in your brain. Not only know info, but how it relates, way of navigating that makes logical and intuitive sense. Not memorizing. Consisder explaining info to a 5 or 10 year old. 
+Two methods may be used to explain higher order learning:
+1. Bloom's Taxonomy: (top to bottom, pyramid)
+o Create: design, assemble, construct, conjecture, develop, formulate, author, investigate
+o Evaluate: appraise, argue, defend, judge, select, support, value, critique, weigh 
+o Analyze: differentiate, organize, relate, compare, contrast, distinguish, examine, experiment, question, test
+o Apply: execute, implement, solve, use, demonstrate, interpret, operate, schedule, sketch
+o Understand: classify, describe, discuss, explain, identify, locate, recognize, report, select, translate. Note understanding is not learning bc isolated.
+o Remember: define, duplicate, list, memorize, repeat state.
+Focus on Apply and above, As Early As Possible. Key.
+
+2. Bloom's Solo Taxonomy (left to right)
+o Prestructural: Learning outcomes show unconnected info and no organization.
+o Unistructural: Learning outcomes show simple connections but importance is not noted.
+o Multistructural: Learning outcomes show connections are made but significance to overall meaning is missing.
+o Relational: Learning outcomes show connections are made and parts are synthesized with overall meaning.
+o Extended abstract: Learning outcomes go beyond the subject and make links to other concepts - generalizing, predicting, evaluating.
+
+Higher Order Learning: Relate information to each other AND bigger picture.
+Don't actually need to spend time at lower orders of learning.
+Summary: Organize ideas in relation to big picture by comparing ideas with and against big picture, other concepts, and create organizational system so that each bit of info relates.
+Every technique you use should leverage off that. So, not just writing notes, but rather figuring out how to use info first. Always looking for relationships, looking to build For example big picture relevance.
+
+Also, need to start training cognitive load tolerance. As a rule of thumb, standard note takers, think linearly and are wordy. Habit of reducing cognitive load, but offloading info to notes. Increase cognitive load capacity. Practice reading or listening, and then rather than writing notes straight away, get into habit of holding onto information a little longer, taking in more information, and asking questions like how does this relate to what I learned and how does this fit into the big picture. You will start to be able to hold onto more info at once, so may read for 15, 20, 30 minutes and create highly organized, processed notes. Expand tolerance for cognitive load.
+
+Most advanced learning techniques require a certain level of cognitive load, so this must be developed as fundamental skill. From this, will be able to do chunking, mind-mapping (although studies have reported this does not yield results,) layering, interleaving, micro-learning, flash-cards, spaced repetition, memorization to supplement, revision.
+
+If not initially proficient with higher-order learning, you may find this process leads to overwhelming relationships and excessive unproductive levels of confusion. If this happens, start with slightly lower-order learning and work way up. Think about applying info first (Not analyzing or evaluating).
+
+3. Five Techniques of Every Successful Student ::
+:: Justin Sung
+:: https://www.youtube.com/watch?v=RJKNtXgo39o
+
+Deeper Learning: Making more meaningful connections.
+Active Learning: Class polls, quizzes, group discussions, game-based learning, that keeps us doing engaged, possibly disorganized learning.
+Threshold concepts: Core concepts in a subject where understanding these concepts is key to transforming the way students understand a whole subject. This can be described as transformative (major shift in understanding,) probably irreversible (difficult to unlearn,) integrative, (reveals the association between concepts,) bounded (specific to a particular discipline,) and poentially troublesome (difficult to grasp, counter-intuitive.) Different from simply challenging concepts. 
+Recursive arroach to learning (having different takes with the material,) and an excursive approach (being on a learning journey with an outcome that has allowances for diversions,) in other words non-linear.
+
+5 Attributes of a good learner:
+1. Priming: quickly preview material to get framework how to think about. Wireframe mindmap of material. No details. Most important.
+2. Event attention: Must be ready to receive information, increase engagement. Asking questions privately or publicly. Particularly why or how questions to relate concept.
+3. Chronology: returning to consolidate concepts. Revision. Sleep Dependent Memory Consolidation.
+4. Revision technique. Active and relate to big picture. Take material in lattice of knowledge. Make notes non-verbal, less words, minimalistic. Reduce cognitive load. Organize and relate to big picture. Delayed Note taking. How/why, simplified, summary sheet, paraphrase, train brain to do internally without writing down.
+5. Revision leading up to test. Pre-test/exam revision. Ability to recognize is much better than ability to recall. Make revision challenging by using recall rather than simply recognizing it. Minimum always recall. No place for recognition based study. Also, learn differently. Iow, re-reading notes is ineffective bc it is non-challenging. Represent notes through doodles, diagrams, mindmaps, or another form. Teaching is a good common way. For programming, challenges.
+
