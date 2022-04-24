@@ -1,0 +1,35 @@
+.wrap {
+    min-width: 400px;
+    width: 80%;
+    margin: auto;
+    background: green;
+    overflow: hidden;
+}
+
+.content, aside {
+    height: 200px;
+}
+
+.content {
+    background: turquoise;
+    float: left;
+    width: 80%;
+}
+
+aside {
+    background: orange;
+    float: left;
+    width: 20%;
+}
+
+aside ul {
+    list-style: none;
+    padding-left: 0;
+}
+/*
+footer  {
+    clear:both;
+}
+*/
+
+/* Note overflow: hidden and footer mean to close out the floating elements and align elements.

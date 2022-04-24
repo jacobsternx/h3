@@ -39,3 +39,20 @@ This will open your keybindings.json file where you can override the Default Key
         "command": "removeSecondaryCursors",
         "when": "editorHasMultipleSelections && textInputFocus"
     },
+
+Command Pallette: Ctrl-P
+Settings: Ctrl-comma
+settings > search for 'enable preview' and disable
+"editor.tabSize": 2
+Emmit: ul>li*4 creates ul with 4 items
+	create div class by typing .classname
+Open/Close sidebar: Ctrl-B
+Open Explorer: Ctrl-shift-E
+Open Find: Ctrl-search F
+Open git: Ctrl-search G
+Move line up/down in editor: Alt-Arrow Up/Down
+Multi-select: Ctrl-D to select word, repeat for more word cursors
+Multi-select: Alt-click, drag for vertical cursor 
+Open/Close Terminal: Ctrl-` (backtick) =or= drag up from bottom of screen
+Select tmux terminal as default --> click (+v) > Select default profile > select shell
+Zen mode: Ctrl-K, Z
