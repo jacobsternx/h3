@@ -7,7 +7,30 @@
 	<link rel="stylesheet" href="css/day17.css">
 </head>
 <body>
-
-
-  
+<form action="#" method="get">
+	<ul>
+		<li> <!-- Name, association, field -->
+			<label for="name"> Enter Your Name:</label>
+			<input id="name" name="name"/>
+		</li>
+		<li> <!-- Comments, association, field -->
+			<label for="comments"> Your Comments:</label>
+			<textarea id="comments" name="comments"></textarea>
+		</li>
+		<li> <!-- checkbox, query string checked is "on", not checked is <null>  -->
+			<label for="css"> Do you like CSS?</label>
+			<input type="checkbox" name="css" id="css">
+		</li>
+		<li> <!-- radio buttons, all same name to only check one, cannot be unchecked -->
+			<label for="radio"> Favorite Language ?</label>
+			<input type="radio" id="CSS" name="radio" value="CSS"> CSS
+			<input type="radio" id="HTML" name="radio" value="HTML"> HTML
+			<input type="radio" id="PHP" name="radio" value="PHP"> PHP
+			<input type="radio" id="MySQL" name="radio" value="MySQL"> MySQL
+		</li>
+		<li> <!-- button, label-->
+			<input type="submit" value="Submit!"/>
+		</li>
+	</ul>
+</form>
 </body>
