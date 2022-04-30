@@ -1,0 +1,7 @@
+phpMyAdmin
+
+:: Move column
+:: BEFORE is a reserved word.
+:: https://dev.mysql.com/doc/refman/8.0/en/keywords.html
+:: Phone numbers require BIG INT up to 9,223,372,036,854,775,807 (2^63)
+:: Int up to 2,147,483,647 (2^31)
