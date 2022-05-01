@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2022 at 11:18 PM
+-- Generation Time: May 01, 2022 at 12:41 PM
 -- Server version: 10.6.5-MariaDB
 -- PHP Version: 8.0.18
 
@@ -30,21 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts` (
   `account_id` int(6) NOT NULL,
   `account_name` varchar(32) NOT NULL,
-  `account_csm` varchar(32) NOT NULL,
-  `account_stripe` varchar(32) NOT NULL
+  `account_csm` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`account_id`, `account_name`, `account_csm`, `account_stripe`) VALUES
-(101, 'taft', 'john', 'a_1001'),
-(102, 'timbox', 'linda', 'a_1002'),
-(103, 'southside', 'sam', 'a_1003'),
-(314, 'columbia', 'britt', 'a_1004'),
-(369, 'casey', 'finn', 'a_1005'),
-(561, 'prairie ', 'eric', 'a_1006');
+INSERT INTO `accounts` (`account_id`, `account_name`, `account_csm`) VALUES
+(1, 'taft', 'john'),
+(2, 'timbox', 'linda'),
+(3, 'southside', 'sam'),
+(4, 'duncanville', 'britt'),
+(5, 'casey', 'finn'),
+(6, 'prairie ', 'eric');
 
 -- --------------------------------------------------------
 
@@ -64,14 +63,14 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_loc`, `event_policy`) VALUES
-(3, 'temple vs jefferson', 'san diego', 'all sales final'),
-(4, 'xavier vs jefferson', 'tempe', 'not supplied'),
-(105, 'andrew vs jackson', 'mesa', 'no refunds'),
-(106, 'john vs kennedy', 'chandler', 'exchanges allowed'),
-(202, 'lyndon vs johnson', 'chandler', 'not supplied'),
-(203, 'scottsdale vs columbus', 'scottsdale', 'refer to client'),
-(404, 'st joseph vs holy names', 'marysville', 'exchanges allowed.'),
-(405, 'kirkland vs deception point', 'bothel', 'refer to client');
+(1, 'temple vs jefferson', 'san diego', 'all sales final'),
+(2, 'xavier vs jefferson', 'tempe', 'not supplied'),
+(3, 'andrew vs jackson', 'mesa', 'no refunds'),
+(4, 'john vs kennedy', 'chandler', 'exchanges allowed'),
+(5, 'lyndon vs johnson', 'chandler', 'not supplied'),
+(6, 'scottsdale vs columbus', 'scottsdale', 'refer to client'),
+(7, 'st joseph vs holy names', 'marysville', 'exchanges allowed.'),
+(8, 'kirkland vs deception point', 'bothel', 'refer to client');
 
 -- --------------------------------------------------------
 
@@ -92,14 +91,14 @@ CREATE TABLE `revenue` (
 --
 
 INSERT INTO `revenue` (`revenue_id`, `revenue_tickets`, `revenue_gate`, `revenue_associations`, `revenue_date`) VALUES
-(1001, '3000', '75', '1500', '2022-01-01'),
-(1002, '1650', '200', '400', '2022-01-15'),
-(1003, '1500', '35', '200', '2022-02-01'),
-(1004, '1850', '400', '240', '2022-02-15'),
-(1005, '2500', '50', '1500', '2022-03-01'),
-(1006, '2250', '150', '220', '2022-03-15'),
-(1007, '2250', '25', '50', '2022-04-01'),
-(1008, '750', '1250', '50', '2022-04-15');
+(1, '3000', '75', '1500', '2022-01-01'),
+(2, '1650', '200', '400', '2022-01-15'),
+(3, '1500', '35', '200', '2022-02-01'),
+(4, '1850', '400', '240', '2022-02-15'),
+(5, '2500', '50', '1500', '2022-03-01'),
+(6, '2250', '150', '220', '2022-03-15'),
+(7, '2250', '25', '50', '2022-04-01'),
+(8, '750', '1250', '50', '2022-04-15');
 
 -- --------------------------------------------------------
 
@@ -118,12 +117,12 @@ CREATE TABLE `schools` (
 --
 
 INSERT INTO `schools` (`school_id`, `school_name`, `school_loc`) VALUES
-(1001, 'jackson', 'phoenix'),
-(1002, 'jefferson', 'spokane'),
-(1003, 'johnson', 'portland'),
-(1004, 'kennedy', 'fremont'),
-(1005, 'heather', 'scottsdale'),
-(1006, 'washington', 'redmond');
+(1, 'heather', 'scottsdale'),
+(2, 'jackson', 'phoenix'),
+(3, 'jefferson', 'spokane'),
+(4, 'johnson', 'portland'),
+(5, 'kennedy', 'fremont'),
+(6, 'washington', 'redmond');
 
 -- --------------------------------------------------------
 
@@ -134,20 +133,20 @@ INSERT INTO `schools` (`school_id`, `school_name`, `school_loc`) VALUES
 CREATE TABLE `teams` (
   `team_id` int(11) NOT NULL,
   `team_name` varchar(32) NOT NULL,
-  `team_sport` varchar(32) NOT NULL
+  `team_mascot` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `teams`
 --
 
-INSERT INTO `teams` (`team_id`, `team_name`, `team_sport`) VALUES
-(1001, 'varsity basketball', 'mens basketball'),
-(1002, 'jv basketball', 'mens basketball'),
-(1003, 'gymnastics', 'acrobatics'),
-(1004, 'varsity baseball', 'mens baseball'),
-(1005, 'varsity wrestling', 'wrestling'),
-(1006, 'varsity swimming', 'swimming and diving');
+INSERT INTO `teams` (`team_id`, `team_name`, `team_mascot`) VALUES
+(1, 'gymnastics', 'wildcats'),
+(2, 'jv basketball', 'bulldogs'),
+(3, 'varsity baseball', 'tigers'),
+(4, 'varsity basketball', 'eagles'),
+(5, 'varsity swimming', 'bombers'),
+(6, 'varsity wrestling', 'saxons');
 
 -- --------------------------------------------------------
 
@@ -157,22 +156,20 @@ INSERT INTO `teams` (`team_id`, `team_name`, `team_sport`) VALUES
 
 CREATE TABLE `tickets` (
   `ticket_id` int(11) NOT NULL,
-  `ticket_order_id` int(11) NOT NULL,
-  `ticket_fan_name` varchar(32) NOT NULL,
-  `ticket_fan_phone` bigint(20) NOT NULL
+  `ticket_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`ticket_id`, `ticket_order_id`, `ticket_fan_name`, `ticket_fan_phone`) VALUES
-(10326196, 401, 'tanner', 5096889903),
-(16875324, 624, 'connor', 5093223222),
-(26978231, 582, 'parker', 5093225156),
-(47623187, 741, 'melissa', 5093234123),
-(87264183, 821, 'casandra', 5094951352),
-(87298013, 546, 'maria', 2063223213);
+INSERT INTO `tickets` (`ticket_id`, `ticket_order`) VALUES
+(10326196, 401),
+(16875324, 624),
+(26978231, 582),
+(47623187, 741),
+(87264183, 821),
+(87298013, 546);
 
 --
 -- Indexes for dumped tables
@@ -213,6 +210,46 @@ ALTER TABLE `teams`
 --
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`ticket_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `account_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `event_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `revenue`
+--
+ALTER TABLE `revenue`
+  MODIFY `revenue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `schools`
+--
+ALTER TABLE `schools`
+  MODIFY `school_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `teams`
+--
+ALTER TABLE `teams`
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87298014;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
