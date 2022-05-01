@@ -1,0 +1,60 @@
+:: JSON arrays in MariaDB
+    The file type for JSON files is ".json"
+    The MIME type for JSON text is "application/json"
+    JSON stands for JavaScript Object Notation
+    JSON is a lightweight data-interchange format
+    JSON is plain text written in JavaScript object notation
+    JSON is Like XML Because:
+    Both JSON and XML are "self describing" (human readable)
+    Both JSON and XML are hierarchical (values within values)
+    Valid Data Types
+    In JSON, values must be one of the following data types:
+    a string
+    a number
+    an object (JSON object)
+    an array
+    a boolean
+    null
+    JSON values cannot be one of the following data types:
+    a function
+    a date
+    undefined
+    JSON Strings
+    Strings in JSON must be written in double quotes.
+    {"name":"John"}
+    JSON Numbers
+    must be an integer or a floating point.
+    {"age":30}
+    JSON Objects
+    JSON Arrays
+    Values in JSON can be arrays.
+    Example
+    {
+    "employees":["John", "Anna", "Peter"]
+    }
+    JSON Booleans
+    {"sale":true}
+    JSON null
+    Values in JSON can be null.
+    {"middlename":null}
+    Values in JSON can be objects.
+    {
+    "employee":{"name":"John", "age":30, "city":"New York"}
+    }
+
+    JSON.parse() is a Js built in function for converting JSON strings into     JavaScript objects:
+    JSON.stringify() is a JavaScript built in function for converting an object     into a JSON string:
+Array functions: (need to implement)
+    JSON_ARRAY() – Create an array
+    JSON_ADDSTART() – Add an element at the beginning ("push")
+    JSON_ADDEND() – Add an element at the end, not knowing the number of elements:
+    JSON_UNQUOTE() – Needed to read a JSON string, unless inside double quotes.
+        Or you can use the ->> operator, but this is not supported by MariaDB.
+    JSON_REPLACE() – Replace a value with another; if the original value does not exist, does nothing.
+    JSON_REMOVE() – Delete an item; the following items will shift by one position.
+    JSON_MERGE() – Appends an array’s items to another array.
+Helper functions:
+    JSON_ITERATE() – Iterate over a JSON array using a normal loop and the             JSON_INSERT() - Adds an element at the specified position. 
+    JSON_EXTRACT() - Accepts two parameters: valid JSON document and a path to a single element, written as a string.
+
+

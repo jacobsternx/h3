@@ -1,7 +1,24 @@
 phpMyAdmin
 
-:: Move column
-:: BEFORE is a reserved word.
-:: https://dev.mysql.com/doc/refman/8.0/en/keywords.html
 :: Phone numbers require BIG INT up to 9,223,372,036,854,775,807 (2^63)
-:: Int up to 2,147,483,647 (2^31)
+:: Int up to 2,147,483,647 (2^31) which works for phone#s 214- and below.
+
+[jacob@fedora-36 ~]$ ls -al /var/lib/phpMyAdmin/
+total 0
+drwxr-xr-x. 1 root   root    50 Feb 11 01:12 .
+drwxr-xr-x. 1 root   root   918 Apr  4 08:37 ..
+drwxr-x---. 1 apache apache  32 Apr  4 08:37 cache
+drwxr-x---. 1 apache apache   0 Feb 11 01:12 config
+drwxr-x---. 1 apache apache  12 Apr 30 21:27 save
+drwxr-x---. 1 apache apache   8 Apr  4 08:47 temp
+drwxr-x---. 1 apache apache   0 Feb 11 01:12 upload
+
+First logout of phpMyAdmin, then:
+sudo chown -R apache:apache /var/lib/phpMyAdmin
+sudo chmod -R 750 /var/lib/phpMyAdmin
+sudo chown root:root /var/lib/phpMyAdmin
+sudo chmod 755 /var/lib/phpMyAdmin
+sudo systemctl restart mariadb
+
+mySQL databases cannot store arrays. A possible solution is to covert your array of strings into one long string (php -implode) and store it as a single string in your database. Then when you pull it out of the atabase, separate it back into an array of strings (php str_split.) Alternatively, store the array as JSON.
+
