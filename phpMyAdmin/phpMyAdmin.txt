@@ -26,3 +26,11 @@ mySQL databases cannot store arrays. A possible solution is to covert your array
 
 :: Move column in SQL
 ALTER TABLE foo MODIFY COLUMN hobby VARCHAR(20) FIRST;
+
+TRUNCATE TABLE removes all rows from a table, but the table structure and its columns, constraints, indexes, and so on remain--except auto_increment will be restored to 1 because no data.
+
+Add the MySQL Yum repository to our Fedora. https://dev.mysql.com/downloads/repo/yum/ and download the MySQL community RPM package. For example, we are using Fedora 29, so we downloaded the mysql80-community-release-fc29-1.noarch.rpm
+
+sudo rpm -v --import mysql_pubkey.asc (create file for mysql armored public key)
+https://dev.mysql.com/downloads/repo/yum/ (download rpm)
+sudo rpm -Uvh mysql80-community-release-fc29-1.noarch.rpm (install rpm)

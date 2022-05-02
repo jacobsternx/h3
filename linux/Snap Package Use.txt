@@ -1,0 +1,44 @@
+Snap Package Use
+
+    A .snap package for the Ubuntu Core system contains all its dependencies. This has a couple of advantages over traditional deb or rpm based dependency handling, the most important being that a developer can always be assured that there are no regressions triggered by changes to the system underneath their app.
+
+1. Finding Snap packages to install
+snap find <search_text>
+
+2. Install Snap packages
+sudo snap install <package>
+
+3. Keep track of Snap packages
+snap list
+3.1 History of the changes made to your system with Snap.
+snap changes
+
+4. Upgrade and downgrade Snap packages
+Snap packages normally checks for updates four times a day and then installs automatically. To force update
+sudo snap refresh <package>
+4.1. To see which Snap packages have updates ready to be installed
+sudo snap refresh --list
+4.2. If wish to revert to the previously installed version
+sudo snap revert <package>
+
+5. Remove Snap packages
+sudo snap remove <package>
+Uninstall a Snap package
+Remove Snap packages
+
+6. Changing channels to switch between beta, release candidate and daily build version. By default, Snap packages are installed from the ‘stable’ channel.
+    stable: The latest stable release of an application
+    candidate: The release candidate (RC) of an application 
+    beta: Unstable version that has reached a certain milestone
+    edge: Daily/nightly build of an application under development
+sudo snap refresh <package> --channel=<channel_name>
+You can switch back to the old channel either by using the refresh command as shown above or simply use the revert command shown in section four.
+
+7. Install Snap apps offline
+snap download <package_name>
+This will download a .assert and a .snap file. You can copy these files to the other Linux system which is not connected to the internet. And then you can install it using the command:
+
+snap ack <package_name.assert>
+snap install <package_name.snap>
+
+May need to “snap download” the “core” snap and if needed a content snap such as “gnome-3-26-1604” which are needed by some of the GNOME snaps.
