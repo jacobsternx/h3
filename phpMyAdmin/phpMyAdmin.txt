@@ -21,7 +21,6 @@ drwxr-x---. 1 apache apache  12 Apr 30 21:27 save
 drwxr-x---. 1 apache apache   8 Apr  4 08:47 temp
 drwxr-x---. 1 apache apache   0 Feb 11 01:12 upload
 
-
 mySQL databases cannot store arrays. A possible solution is to covert your array of strings into one long string (php -implode) and store it as a single string in your database. Then when you pull it out of the atabase, separate it back into an array of strings (php str_split.) Alternatively, store the array as JSON.
 
 :: Move column in SQL
@@ -34,3 +33,7 @@ Add the MySQL Yum repository to our Fedora. https://dev.mysql.com/downloads/repo
 sudo rpm -v --import mysql_pubkey.asc (create file for mysql armored public key)
 https://dev.mysql.com/downloads/repo/yum/ (download rpm)
 sudo rpm -Uvh mysql80-community-release-fc29-1.noarch.rpm (install rpm)
+
+dbeaver https://dbeaver.io/
+DbVisualizer https://www.dbvis.com/download/
+

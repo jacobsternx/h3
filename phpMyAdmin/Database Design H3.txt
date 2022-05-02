@@ -1,0 +1,72 @@
+h3
+
+accounts
+a.id P INN AI
+a.name V16
+
+schools
+s.id P INN AI
+s.name V16
+
+teams
+t.id P INN AI
+t.name V16
+
+events
+e.id P INN AI
+e.name V16
+
+tickets
+t.id P INN AI
+t.ticket_id INN
+t.ticket_order INN
+
+revenue
+r.id P INN AI
+r.bo D
+r.pos D
+r.associations D
+r.payout date INN // day of month
+
+CREATE DATABASE h3;
+USE h3;
+
+CREATE TABLE accounts (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR (16) NOT NULL,
+  PRIMARY KEY (id)
+) AUTO_INCREMENT = 1000;
+
+CREATE TABLE schools (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR (16) NOT NULL,
+  PRIMARY KEY (id)
+) AUTO_INCREMENT = 1000;
+
+CREATE TABLE teams (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR (16) NOT NULL,  
+  PRIMARY KEY (id)
+) AUTO_INCREMENT = 1000;
+
+CREATE TABLE events (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR (16) NOT NULL,  
+  PRIMARY KEY (id)
+) AUTO_INCREMENT = 1000;
+
+CREATE TABLE tickets (
+  id INT NOT NULL AUTO_INCREMENT,
+  ticket_id INT NOT NULL,
+  ticket_order INT NOT NULL,
+  PRIMARY KEY (id)
+) AUTO_INCREMENT = 1000;
+
+CREATE TABLE revenue (
+  id INT NOT NULL AUTO_INCREMENT,
+  bo DECIMAL (9,2) NOT NULL,
+  pos DECIMAL (9,2) NOT NULL,
+  associations DECIMAL (9,2) NOT NULL,
+  payout_date INT NOT NULL,
+  PRIMARY KEY (id),
+) AUTO_INCREMENT = 1000;
