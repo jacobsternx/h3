@@ -26,7 +26,6 @@ r.id P INN AI
 r.bo D
 r.pos D
 r.associations D
-r.payout date INN // day of month
 
 CREATE DATABASE h3;
 USE h3;
@@ -35,38 +34,82 @@ CREATE TABLE accounts (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR (16) NOT NULL,
   PRIMARY KEY (id)
-) AUTO_INCREMENT = 1000;
+) AUTO_INCREMENT = 1001;
 
 CREATE TABLE schools (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR (16) NOT NULL,
-  PRIMARY KEY (id)
-) AUTO_INCREMENT = 1000;
+  account_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (account_id) REFERENCES accounts(id)
+) AUTO_INCREMENT = 1001;
 
 CREATE TABLE teams (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR (16) NOT NULL,  
-  PRIMARY KEY (id)
-) AUTO_INCREMENT = 1000;
+  school_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (school_id) REFERENCES schools(id)
+) AUTO_INCREMENT = 1001;
 
 CREATE TABLE events (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR (16) NOT NULL,  
-  PRIMARY KEY (id)
-) AUTO_INCREMENT = 1000;
+  team_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (team_id) REFERENCES teams(id)
+) AUTO_INCREMENT = 1001;
 
 CREATE TABLE tickets (
   id INT NOT NULL AUTO_INCREMENT,
   ticket_id INT NOT NULL,
   ticket_order INT NOT NULL,
-  PRIMARY KEY (id)
-) AUTO_INCREMENT = 1000;
+  event_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (event_id) REFERENCES events(id)
+) AUTO_INCREMENT = 1001;
 
 CREATE TABLE revenue (
   id INT NOT NULL AUTO_INCREMENT,
   bo DECIMAL (9,2) NOT NULL,
   pos DECIMAL (9,2) NOT NULL,
   associations DECIMAL (9,2) NOT NULL,
-  payout_date INT NOT NULL,
+  ticket_id INT NOT NULL,
   PRIMARY KEY (id),
-) AUTO_INCREMENT = 1000;
+  FOREIGN KEY (ticket_id) REFERENCES tickets(id)
+) AUTO_INCREMENT = 1001;
+
+INSERT INTO accounts (name)
+VALUES ('timbox'), ('southside'), ('galveston');
+SELECT * FROM accounts LIMIT 2;
+SELECT name FROM accounts;
+SELECT id AS 'ID', name AS 'Account Name' FROM accounts;
+SELECT * FROM accounts ORDER BY name DESC;
+
+https://www.w3schools.com/Sql/sql_foreignkey.asp
+INSERT INTO schools (name, account_id) VALUES ('monroe', 1001), ('chandler',1002), ('saxon', 1002), ('angelitas', 1003), ('academy', 1003);
+SELECT * FROM schools;
+SELECT DISTINCT name FROM schools;
+UPDATE schools SET account_id = 1001 WHERE id = 1005;
+SELECT * FROM schools WHERE id < 1003;
+SELECT * FROM schools WHERE name LIKE '%e%' OR account_id = 1002;
+SELECT * FROM schools WHERE name = 'academy'AND account_id = 1005;
+SELECT * FROM schools WHERE id BETWEEN 1001 AND 1005; (this is inclusive)
+// SELECT * FROM schools WHERE xyz IS NULL; (where xyz = NULL is allowed)
+DELETE FROM schools WHERE id = 1005;
+SELECT * FROM schools JOIN accounts ON accounts.id = schools.account_id;
+// JOIN = INNER JOIN = Itersection
+// LEFT, RIGHT JOIN = Union
+SELECT AVG(id) FROM schools;
+// SUM and COUNT are also useful
+SELECT account_id, COUNT(account_id) from schools GROUP BY account_id;
+// ^ groups # of schools inside account
+SELECT b.name AS account_name, COUNT(s.id) AS num_schools from accounts as a
+LEFT JOIN schools AS s ON a.id = s.band_id GROUP BY a.id;
+// ^ # schools per account 52:22 https://www.youtube.com/watch?v=p3qvj9hO_Bo
+SELECT a.name AS account_name, COUNT(s.id) AS num_schools from accounts as a
+LEFT JOIN schools AS s ON a.id = s.account_id GROUP BY a.id;
+// WHERE statements happen before GROUP BY, HAVING statements after GROUP BY so can use aggregate function data. Otherwise HAVING ~ WHERE.
+SELECT a.name AS account_name, COUNT(s.id) AS num_schools from accounts as a
+LEFT JOIN schools AS s ON a.id = s.account_id GROUP BY a.id HAVING id = 1001;
+// ^ WHERE vs HAVING 54:30 https://www.youtube.com/watch?v=p3qvj9hO_Bo
