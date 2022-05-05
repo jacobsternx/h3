@@ -15,7 +15,7 @@ systemctl list-unit-files --type service -all
 :: Increase dnf speed ::
 sudo dnf install dnf-plugins-core -y
 sudo nano /etc/dnf/dnf.conf
-max_parallel_downloads=10
+max_parallel_downloads=16
 fastestmirror=True
 
 :: How do I change desktops in Linux? ::
@@ -55,6 +55,12 @@ dnf history  info (id_number) [start and end time, who ran, packages installed, 
 dnf grouplist -v [list desktop environments]
 dnf install @basic-desktop-environment -y [install basic desktop environment]
 dnf remove @basic-desktop-environment -y [remove basic desktop environment]
+dnf repolist
+dnf config-manager --set-disabled google-chrome [remove repo from config]
+To add a new repository, as root:
+    Define new repository by adding a new file with .repo suffix to /etc/yum.repos.d/. For options in .repo file, see Setting [repository] Options section in System Administrator’s Guide
+dnf config-manager --add-repo /etc/yum.repos.d/fedora_extras.repo [add repo]
+dnf config-manager --set-enabled fedora-extras [enable repo]
 
 :: dnf - switching streams ::
 Switching streams is a risky operation that might not be always supported in packages, especially downgrades.
