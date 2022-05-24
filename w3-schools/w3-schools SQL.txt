@@ -1,0 +1,18 @@
+W3 Schools SQL Tutorial
+
+Introduction to SQL
+
+:: SQL is a Standard - BUT....
+
+Although SQL is an ANSI/ISO standard, there are different versions of the SQL language.
+
+However, to be compliant with the ANSI standard, they all support at least the major commands (such as SELECT, UPDATE, DELETE, INSERT, WHERE) in a similar manner.
+
+:: RDBMS
+
+Every table is broken up into smaller entities called fields. A field is a column in a table that is designed to maintain specific information about every record in the table.
+
+A record, also called a row, is each individual entry that exists in a table. A record is a horizontal entity in a table. 
+
+A column is a vertical entity in a table that contains all information associated with a specific field in a table.
+

@@ -1,0 +1,80 @@
+Tier 2 KB Review
+6. Internal Reporting
+7. Fee Structure
+Credit Card Transaction Fees by Sales Channel
+ 
+Online & Create Order
+Clients with Stripe Accounts
+Credit Card/Merchant Fees: 2.9% + $0.30 (per order)
+HomeTown Fees: $1.00 (per ticket)
+Example: ($5 ticket + $0.30 + $1 HomeTown Fee) / 0.971 CC fee = $6.48
+ 
+Point of Sale (POS) / Gate App
+Client with Stripe Accounts
+Fees are based on the Ticket Price as outlined below:
+Ticket Price	Total Fee of Transaction
+$0.50 - $2.40	          $0.12            
+$2.41 - & Higher	5%
+ 
+*Credit Card/Merchant Fees: 2.7% + $0.05 per order regardless of ticket price. 
+
+Credit Card/Merchant fees are calculated and then deducted from the Transaction fee amount and HomeTown retains the balance.
+Examples:
+
+($5 ticket * 5%) = $0.25 Transaction Fee total
+
+(($5 ticket + $0.05) / 0.973) - $5 = $0.19 Stripe Fee total
+
+HomeTown Fee Calculation: $0.25 Transaction Fee total - $0.19 Stripe Fee = $0.06 HomeTown collects
+
+​($2 ticket) = $0.12 Transaction Fee total
+
+(($2 ticket + $0.05) / 0.973) - $2 = $0.10 Stripe Fee total
+
+HomeTown Fee Calculation: $0.12 Transaction fee total - $0.10 Stripe Fee = $0.02 HomeTown collects
+ 
+($0.50 ticket) = $0.12 Transaction Fee total
+
+(($0.50 ticket + $0.05) / 0.973) - $0.50 = $0.07 Stripe Fee
+
+HomeTown Fee Calculation: $0.12 Transaction fee total - $0.07 Stripe Fee = $0.05 HomeTown collects
+ 
+Cash and Check Transaction Fees
+
+No fees are associated with Cash or Check transactions.
+ 
+HomeTown Fee Breakdown
+
+Single Tickets
+$1.00 per ticket listed outside of the ticket price
+
+Season Passes
+Fee is automatically built into the ticket price:
+$3.00 per ticket for digital passes
+$5.00 per ticket for hard passes
+Example: A $100 online season pass for a school will build in a $3 fee for a base price of $103 (This is what the fan sees at checkout, plus CC fees in a separate line). The $3 fee goes to HomeTown.
+
+Season Tickets
+$3.00 fee is listed outside of the ticket price:
+Fee is per package, not per ticket in the package
+Example:  A $100 season ticket will show a base price of $100 to the purchaser, with a $3 fee listed outside of the season ticket price.
+ 
+Passing Along/Absorbing of Fees
+The ability to Pass Along or Absorb Fees can be set at the Box Office level under Settings or at the event level under Advanced Options.
+ 
+*Taxes (if applicable) are not able to be absorbed into the price, since the client is solely accountable for the accuracy of those fees. 
+ 
+Below are some examples of how fees will display to the fan, based on the fee settings that are applied.
+
+If a client opts to absorb fees, fans will only see the base ticket value in their cart and the HomeTown Fee and CC fee will be deducted from each transaction on the backend.
+
+If a client opts to NOT absorb fees and pass along to purchasers, fans will see the base ticket value in their cart and a line item for processing fees.
+
+If a client opts to absorb CC fees but not the HomeTown Fee, fans will see the base ticket value in their cart and the $1.00 HomeTown Fee as a processing fee.
+
+If a client opts to absorb the HomeTown Fee but not the CC fees, fans will see the base ticket value in their cart and the applicable CC fees as a processing fee.
+
+
+----- 8< -----
+How do Flex/Scan Pass scan count, and request to remove duplicates work?
+Habit of adding resolution.
